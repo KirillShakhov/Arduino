@@ -2,7 +2,7 @@ void WIFIinit() {
   // Попытка подключения к точке доступа
   WiFi.mode(WIFI_STA);
   byte tries = 11;
-  WiFi.begin(_ssid, _password);
+   WiFi.begin(_ssid.c_str(), _password.c_str());
   // Делаем проверку подключения до тех пор пока счетчик tries
   // не станет равен нулю или не получим подключение
   while (--tries && WiFi.status() != WL_CONNECTED)
@@ -27,8 +27,9 @@ void WIFIinit() {
   }
 }
 
-bool StartAPMode()
-{ // Отключаем WIFI
+bool StartAPMode() {
+  IPAddress apIP(192, 168, 4, 1);
+  // Отключаем WIFI
   WiFi.disconnect();
   // Меняем режим на режим точки доступа
   WiFi.mode(WIFI_AP);
